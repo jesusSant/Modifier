@@ -32,14 +32,42 @@ When the modification field is Negated, the type_modification field can take the
 * postNegPhrases
 * conjunctions
 
+### Modifiers
+-------------
+This algorithm allows to determine not only the negation, but also the uncertainty, the doubt (fuzzy logic).
+To do this, 4 types of modifiers are distinguished, ordered from highest to lowest degree of modification:
+1. Neg-phrases: ausencia de, rechazado, declina, etc.
+2. Post-neg-phrases: debe descartarse para, debe ser descartado para, improbable, etc.
+3. Pseudo-neg-phrases: sin aumento, sin cambios sospechosos, tengo dudas, etc.
+4. Conjunctions: pero, sin embargo, aunque, etc.
+
+Neg-phrases contains the most radical modifiers. That is, it contains modifiers that deny the term in question, and are equivalent to the logical connective of the negation in the propositional logic. For example, if the term were fever, these modifiers would deny this term: absence of fever, without fever, etc.
+The next, post-neg-phrases, also indicates denial, but includes some doubt, so it is a little less strict than the previous one.
+Pseudo-neg-phrases is very similar to the previous one, but it includes the doubt directly between its possibilities: I am not sure if, I doubt, I have doubts, etc.
+Finally, the least restrictive, are in conjunctions, and correspond to the adversative conjunctions. That is, they contradict, partially or totally, the term: however, but, if not, etc. These modifiers, therefore, allow to determine the degree of uncertainty that a term has with respect to the phrase in which it appears.
+This can be very useful for applications that use Modifier to, for example, assign a specific weight to the terms according to their 'degree' of modification. For example, a weight of 0.25 could be assigned to the terms modified with (1), 0.50 to those modified with (2), 0.75 to those modified with (3), and 0.85 to those modified with (4).
+
 
 ### Directory structure
 ---------
-
+The Modifier directory structure corresponds to a unique package nomenclature called *es.cnio.bionlp.modifier*
+This allows their 'fully qualified class name' to be unique.
+Therefore, all packages are within that structure:
+* es/cnio/bionlp/modifier/config_files/eng/with_lemma/: includes the 4 files with the modifiers explained above, in English and lemmatized.
+* es/cnio/bionlp/modifier/config_files/eng/without_lemma/: includes the 4 files with the modifiers explained above, in English and without lemma.
+* es/cnio/bionlp/modifier/config_files/spa/with_lemma/: includes the 4 files with the modifiers explained above, in Spanish and lemmatized.
+* es/cnio/bionlp/modifier/config_files/spa/without_lemma/: includes the 4 files with the modifiers explained above, in Spanish and without lemma.
+* es/cnio/bionlp/modifier/in/: includes the input file in.txt
+* es/cnio/bionlp/modifier/main/: includes the main class Main.java and the execution JAR file modifier.jar.
+* es/cnio/bionlp/modifier/misc/: includes the modification algorithm. 
+* es/cnio/bionlp/modifier/out/: includes the output file callKit.result.
+* es/cnio/bionlp/modifier/util/: includes utility java classes.
 
 
 ### Usage
 ---------
+To install and compile Modifier you can consult the file *Installation.md*.
+In this section we will assume that it has been installed and compiled correctly, and we only show some execution examples.
 
 java es.cnio.bionlp.modifier.main.Main [options]
 
@@ -84,6 +112,47 @@ This generates an output file in the directory "out" with the following line:
 
 	1	cáncer	"El paciente no presenta cáncer ni anemia"	Negated	negPhrases
 
+
+### Execution via JAR file
+-----------------------------------
+The modifier.jar file allows to execute Modifier directly from a terminal such as cmd, terminator, etc.
+To do this, you have to write the following command line (from the directory where modifier.jar is located):
+<pre>
+java -jar modifier.jar [options]
+</pre>
+Where *options* are those shown in the 'Usage' section.
+For example, if we type:
+<pre>
+java -jar modifier.jar -help
+</pre>
+Modifier will show the allowed options, that is:
+<pre>
+Usage: java es.cnio.bionlp.modifier.main.Main [options]
+Options:
+   -help                   <>          : Show this message
+   -displayon              <boolean>   : Show the messages at the standard output. Default TRUE (show)
+   -language               <string>    : Name of the input language. Default Spanish.
+   -answerOptionYes        <boolean>   : TRUE (Yes) or FALSE (No). Default: TRUE (Yes)
+   -isOuputFileGenerated   <boolean>   : TRUE generate output file, FALSE generate List. Default TRUE.
+   -lemmaConfigFiles       <boolean>   : Configuration files with lemma (TRUE) or without lemma (FALSE). Default TRUE (with lemma).
+   -routeConfigFiles       <string>    : Config files folder name. Default: in ../config_files/
+   -routeInTextFile        <string>    : Name of the input text file. Default: in ../in/in.txt
+   -routeOutTextFile       <string>    : Name of the output text file. Default: in ../out/callKit.result
+</pre>
+The modifier.jar file, as indicated above, is found at src/es/cnio/bionlp/modifier/main/modifier.jar
+So, if we move to the 'main' folder and type this:
+<pre>
+java -jar modifier.jar
+</pre>
+Modifier will take the default options, and being in the directory structure 'by default' will be executed:
+* In the in.txt file, that is in src/es/cnio/bionlp/modifier/in/in.txt
+* With the configuration files that are in src/es/cnio/bionlp/modifier/config_files/
+* It will generate an output file called callKit.result in src/en/cnio/bionlp/modifier/out/callKit.result
+
+If we change modifier.jar to another directory, we must specify these routes in the options, so that it works correctly.
+For example, if we move modifier.jar at the 'es' parent directory, we could execute it in the following manner:
+java -jar modifier.jar -routeConfigFiles ./en/cnio/bionlp/modifier/config_files/ -routeInTextFile ./en/cnio/bionlp/modifier/in/in.txt -routeOutTextFile ./out.txt
+What will cause it to run with the input file and the previous configuration files, but it will generate an output file at the 'es' parent directory named 'out.txt'.
 
 ## Contact
 ----------
