@@ -24,12 +24,11 @@ It is necessary to include in the PATH, and CLASSPATH environment variables, the
 ---------
 This variable informs the Operating System (OS) where Java is located within it.
 Therefore, it is dependent on the OS:
-* Windows: Generally when installing java in Windows, it automatically includes in the PATH variable the path to the Java 'bin' directory.
-To be sure, we have to type (cmd terminal):
+* Windows: Generally when installing Java in Windows, it automatically includes in the PATH variable the path to the Java 'bin' directory. To be sure, we have to type (cmd terminal):
 <pre>
 echo %PATH%
 </pre>
-We can also see in 'Environment Variables' within 'System Properties', the routes that are included within the PATH variable.
+We can also see the routes included within the PATH variable in 'Environment Variables' within 'System Properties'.
 The absolute path must appear to the 'bin' directory of the version of the JDK that we have installed.
 For example, if we have installed 1.8.0_152 version inside 'Program_Files', we'll see something like this:
 <pre>
@@ -42,24 +41,23 @@ set PATH=C:\Program_Files\Java\jdk1.8.0_152\bin;%PATH%
 </pre>
 * Linux: To include it in linux, we open a terminal and type:
 <pre>
-export PATH='ruta':$PATH
+export PATH='route':$PATH
 </pre>
-With this the changes will be temporary, closing the terminal will disappear.
-If we want them to be permanent, we can edit the .bashrc file, by writing:
+Where 'route' is the path to the Java 'bin' directory. With this the changes will be temporary, closing the terminal will disappear.
+If we want them to be permanent, we can edit the *.bashrc* file, by writing:
 <pre>
 gedit /home/usuario/.bashrc
 </pre>
-This will open .bashrc in the 'gedit' text editor. We just have to include the following two lines, at the end of it:
+This will open *.bashrc* in the 'gedit' text editor. We just have to include the following two lines, at the end of it:
 <pre>
-PATH=ruta:$PATH
+PATH=route:$PATH
 export PATH
 </pre>
-When saving the changes in 'gedit', they will now be permanent.
-We can close the terminal, reopen it, and type:
+When saving the changes in 'gedit', they will now be permanent. We can close the terminal, reopen it, and type:
 <pre>
 echo $PATH
 </pre>
-We will see that the PATH variable contains the path to the Java 'bin' directory.
+Now, we will see that the PATH variable contains the path to the Java 'bin' directory.
 
 
 #### CLASSPATH
@@ -88,7 +86,7 @@ If you have downloaded Modifier from Git-Hub, the directory structure will have 
 <pre>
 es/cnio/bionlp/modifier/...
 </pre>
-The route to set the CLASSPATH is the 'es' parent directory. For example, we will assume that in ** Windows ** we have downloaded it at 'Software':
+The route to set the CLASSPATH is the 'es' parent directory. For example, we will assume that in **Windows** we have downloaded it at 'Software':
 <pre>
 C:\Software\es\cnio\bionlp\modifier\...
 </pre>
@@ -96,7 +94,7 @@ Then, the CLASSPATH must be set to 'Software':
 <pre>
 set CLASSPATH=C:\Software;%CLASSPATH%
 </pre>
-In ** Linux ** it is very similar. For example, if we have downloaded it at 'Software':
+In **Linux** it is very similar. For example, if we have downloaded it at 'Software':
 <pre>
 /home/user/Software/es/cnio/bionlp/modifier/...
 </pre>
@@ -112,12 +110,12 @@ To compile the .java files, we only have to move, in the terminal, at the direct
 <pre>
 javac *.java
 </pre>
-For example, to compile the files that are into the 'util' directory, we type the following under ** Windows ** (we will assume that Modifier was downloaded at 'Software', see the previous section):
+For example, to compile the files that are into the 'util' directory, we type the following under **Windows** (we will assume that Modifier was downloaded at 'Software', see the previous section):
 <pre>
 cd C:\Software\es\cnio\bionlp\modifier\util
 C:\Software\es\cnio\bionlp\modifier\util> javac *.java
 </pre>
-Under ** Linux ** it is very similar (as before, we will assume that it was downloaded at 'Software', see the previous section):
+Under **Linux** it is very similar (as before, we will assume that it was downloaded at 'Software', see the previous section):
 <pre>
 $ cd /home/user/Software/es/cnio/bionlp/modifier/util
 $ javac *.java
@@ -129,7 +127,7 @@ In a similar manner it would be for the rest of the directories that contain .ja
 /es/cnio/bionlp/modifier/util/
 </pre>
 Once compiled, we can execute it.
-For this, the simplest way is to move (in the terminal) at 'main', and type:
+For this, the simplest way is to move (in the terminal) at 'main' directory, and type:
 <pre>
 java es.cnio.bionlp.modifier.main.Main [options]
 </pre>
