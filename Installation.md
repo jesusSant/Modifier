@@ -65,7 +65,7 @@ Now, we will see that the PATH variable contains the path to the Java 'bin' dire
 The CLASSPATH environment variable is modified with the set command. The format is:
 <pre>
 set CLASSPATH=path1;path2 ... (Windows)
-export CLASSPATH=path1;path2 ... (Linux)
+export CLASSPATH=path1:path2 ... (Linux)
 </pre>
 The paths should begin with the letter specifying the drive, for example, C:\ under Windows or /home/user/ under Linux. 
 That way, the classes will still be found if you happen to switch to a different drive. 
