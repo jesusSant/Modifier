@@ -115,6 +115,10 @@ For example, to compile the files that are into the 'util' directory, we type th
 cd C:\Software\es\cnio\bionlp\modifier\util
 C:\Software\es\cnio\bionlp\modifier\util> javac *.java
 </pre>
+In Windows, by default, the files are encoded in ASCII (in Linux in UTF-8), so, to avoid compilation errors for certain characters, it is convenient to compile the java files, setting utf8 as the *encoding* flag, like this:
+<pre>
+javac -encoding utf8 * .java
+</pre>
 Under **Linux** it is very similar (as before, we will assume that it was downloaded at 'Software', see the previous section):
 <pre>
 $ cd /home/user/Software/es/cnio/bionlp/modifier/util
